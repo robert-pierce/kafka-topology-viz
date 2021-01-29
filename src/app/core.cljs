@@ -44,10 +44,10 @@
 (defn parse-raw-input
   [input]
   (try
-    (let [{:keys [ascii-topo edn-topo] :as json} (if (map? input) input  (parse-json input))]
-      (js/console.log "Parse-raw-input ascii-topo is: " (v/topology-vega-spec (vf/format-vega-spec edn-topo)))
+    (let [{:keys [ascii-topo json-topo] :as json} (if (map? input) input  (parse-json input))]
+      (js/console.log "Parse-raw-input ascii-topo is: " (v/topology-vega-spec (vf/format-vega-spec json-topo)))
       
-      {:vega-spec (-> (vf/format-vega-spec edn-topo) v/topology-vega-spec)
+      {:vega-spec (-> (vf/format-vega-spec json-topo) v/topology-vega-spec)
        :ascii-spec ascii-topo})
     (catch :default e
       (js/alert "Error parsing json"))))
